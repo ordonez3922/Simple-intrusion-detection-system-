@@ -1,111 +1,171 @@
-# Simple Python Intrusion Detection System (IDS)
+# Simple IDS CYB333 Project
 
 **Author:** Nikolas Ordonez  
+**GitHub Username:** ordonez3922  
 **Project Type:** Python Security Automation  
-**Purpose:** Educational cybersecurity project
+**Course:** CYB333  
+**Notebook File:** `Simple IDS CYB333 Project.ipynb`  
+**Purpose:** Educational cybersecurity project focused on basic intrusion detection
 
 ## 1. Project Overview
 
-This project is a Python-based Intrusion Detection System (IDS) designed to analyze authentication log files and detect repeated failed login attempts from the same source IP address. The program reviews log entries, identifies failed password events, and tracks how often each IP address attempts to authenticate within a defined time window.
+This project is a Python-based Intrusion Detection System (IDS) designed to analyze authentication log files and detect repeated failed login attempts from the same source IP address. The program reads log entries, identifies failed login events, tracks the timestamps of those failures, and raises an alert when a threshold is reached.
 
-The goal is to demonstrate how a simple Python script can automate basic security monitoring. This project is intentionally lightweight and educational, making it useful for learning about log analysis, regular expressions, data collection, and threshold-based detection logic.
+The goal of this project is to demonstrate how Python can be used for basic security monitoring and log analysis in an educational setting. It uses a lightweight, rule-based detection approach rather than advanced intrusion detection methods, making it suitable for learning and classroom use.
 
 ## 2. Project Objectives
 
-The objectives of this project are to:
+The main objectives of this project are to:
 
-- Develop a beginner-friendly intrusion detection system using Python.
-- Analyze authentication log files for failed login attempts.
+- Develop a basic intrusion detection system using Python.
+- Analyze authentication logs for failed login attempts.
 - Extract source IP addresses associated with suspicious activity.
-- Track repeated failed login attempts over time.
-- Detect patterns that exceed a configured threshold.
-- Generate an alert when suspicious behavior is identified.
-- Demonstrate practical cybersecurity concepts with a simple implementation.
-- Apply Python programming fundamentals to a real-world security monitoring scenario.
+- Track repeated failed login attempts over a defined time period.
+- Trigger alerts when activity exceeds a configured threshold.
+- Demonstrate cybersecurity concepts in a simple, practical implementation.
+- Apply Python programming skills to a realistic security scenario.
+- Document the system clearly for learning and future expansion.
 
 ## 3. Key Features
 
 ### Authentication Log Analysis
-The program reads a log file line by line and searches for entries that indicate failed login attempts.
+The program reads an authentication log file line by line and searches for failed login attempts.
 
 ### IP Address Extraction
-A regular expression identifies failed login entries and extracts the source IP address associated with each event.
+A regular expression identifies failed login entries and extracts the relevant source IP address from each event.
 
-### Failed Login Tracking
-The system stores failed login timestamps for each IP address using Python's `defaultdict` collection, making it easy to track retry patterns.
+### Failure Tracking
+The system keeps a record of failed login timestamps for each IP address using Python data structures.
 
 ### Time-Based Detection
-The IDS removes older attempts outside the configured time window so the detection logic focuses on recent activity.
+The IDS evaluates failed attempts within a configurable time window so that only recent activity is considered.
 
 ### Threshold-Based Alerts
-An alert is raised when an IP address exceeds a defined number of failed login attempts within a set time period.
+An alert is triggered when an IP address exceeds the defined number of failed login attempts within the configured time period.
 
-### Simulated Real-Time Processing
-The script introduces a short delay between log entries to simulate real-time monitoring for demonstration purposes. It reads from an existing log file rather than continuously following new events.
+### Simulated Real-Time Monitoring
+A short delay between entries simulates real-time processing for demonstration purposes. The system reads from a log file rather than monitoring live traffic.
+
+### Notebook Implementation
+This project is provided in a Jupyter Notebook format:
+
+`Simple IDS CYB333 Project.ipynb`
+
+This allows the logic to be run interactively, with code cells and explanatory comments.
 
 ## 4. Technologies and Dependencies
 
-This project uses:
+This project uses the following technologies and standard library modules:
 
-- **Python 3:** The primary programming language used to build the IDS.
-- **`time`:** Used to track timestamps and delay processing between log entries.
-- **`re`:** Used to search log entries and extract relevant information.
-- **`collections.defaultdict`:** Used to store failed login attempts by source IP address.
+- **Python 3**: Main programming language
+- **`re`**: For matching log patterns and extracting IP addresses
+- **`time`**: For timestamps and simulated delay handling
+- **`collections`**: For organizing failed-attempt tracking
+- **Jupyter Notebook**: For interactive project execution and documentation
 
-All required dependencies are part of Python's standard library, so no third-party packages are necessary.
+No external packages are required beyond Python and Jupyter Notebook.
 
 ## 5. Prerequisites
 
-Before running the program, ensure that you have:
+Before running the project, make sure you have:
 
-- Python 3 installed on your system.
-- A Python source file named `ids.py`.
-- An authentication log file named `Auth.Log`.
-- Log entries formatted consistently with the pattern expected by the script.
+- Python 3 installed on your machine
+- Jupyter Notebook or JupyterLab installed
+- A log file containing authentication events
+- A working understanding of basic Python syntax
 
-The Python file and log file should be located in the same directory.
+The notebook and log file should be located in the same directory unless you modify the file path in the code.
 
 ## 6. Installation and Setup
 
 ### Step 1: Install Python
-
-Download and install Python 3 from the official Python website:
+Download and install Python 3 from the official website:
 
 https://www.python.org/downloads/
 
-Verify the installation by opening a terminal or command prompt and running:
+Verify your installation by opening a terminal and running:
 
 ```bash
 python --version
 ```
 
-If your system uses `python3` instead of `python`, run:
+If your system uses `python3`, run:
 
 ```bash
 python3 --version
 ```
 
-### Step 2: Download the Project
-
-Clone the repository from GitHub using Git:
-
-```bash
-git clone https://github.com/YOUR-USERNAME/simple-python-ids.git
-```
-
-Replace `YOUR-USERNAME` with the appropriate repository owner or username.
-
-Then navigate to the project directory:
+### Step 2: Install Jupyter Notebook
+If Jupyter is not already installed, install it using:
 
 ```bash
-cd simple-python-ids
+pip install notebook
 ```
 
-### Step 3: Prepare the Log File
+Then launch Jupyter with:
 
-Create a file named `Auth.Log` in the same directory as `ids.py`.
+```bash
+jupyter notebook
+```
 
-For testing, you may use fictional log entries like the following:
+### Step 3: Download the Project
+Clone the repository from GitHub:
+
+```bash
+git clone https://github.com/ordonez3922/Simple-intrusion-detection-system-.git
+```
+
+Navigate to the project folder:
+
+```bash
+cd Simple-intrusion-detection-system-
+```
+
+### Step 4: Open the Notebook
+Open the file:
+
+```bash
+Simple IDS CYB333 Project.ipynb
+```
+
+in Jupyter Notebook to run the project.
+
+## 7. How the Project Works
+
+The IDS follows this sequence:
+
+1. **Initialize detection settings**  
+   Define the log filename, regex pattern, threshold, and time window.
+
+2. **Read the log file**  
+   Process each line in the authentication log.
+
+3. **Identify failed login events**  
+   Use a regular expression to find failed password attempts.
+
+4. **Extract the source IP**  
+   Capture the IP address associated with each failed login event.
+
+5. **Track timestamps**  
+   Store the time when each failed attempt occurred.
+
+6. **Filter outdated activity**  
+   Remove attempts outside the selected time window.
+
+7. **Evaluate threshold**  
+   Check whether the number of failed attempts exceeds the allowed limit.
+
+8. **Trigger alert**  
+   Print a warning when suspicious activity is detected.
+
+9. **Reset tracking**  
+   Clear the stored attempts for the IP address after the alert is raised.
+
+This process demonstrates the core logic behind basic event-based detection and threshold-driven alerting.
+
+## 8. Example Log Input
+
+Example log entries may look like this:
 
 ```text
 Failed password for guest from 192.168.1.25
@@ -113,128 +173,85 @@ Failed password for guest from 192.168.1.25
 Failed password for guest from 192.168.1.25
 ```
 
-These entries demonstrate how the IDS identifies repeated failed login attempts from the same source IP address.
+If the same IP address exceeds the threshold within the defined time window, the system identifies it as suspicious.
 
-Use only authorized or fictional data when testing the program.
+## 9. Example Output
 
-## 7. How to Run the Program
-
-Open a terminal in the project directory and run:
-
-```bash
-python ids.py
-```
-
-If your environment requires `python3`, use:
-
-```bash
-python3 ids.py
-```
-
-The program will display a startup message and begin processing the log file.
-
-Example startup output:
-
-```text
-[*] simulated IDS monitoring Auth.Log for failed login attempts.
-```
-
-When an IP address reaches the configured threshold, the script generates an alert similar to:
+A typical alert output may look like:
 
 ```text
 ALERT: 192.168.1.25 has exceeded the failed login threshold.
 ```
 
-The actual output depends on the contents of the log file and the timing of the entries.
+The actual output depends on the contents of the log file and the threshold/time-window values configured in the script.
 
-## 8. How the IDS Works
+## 10. Configuration Options
 
-The program follows these steps:
+The project can be adjusted by modifying key variables such as:
 
-1. **Initialize configuration:** Set the log filename, detection pattern, threshold, and time window.
-2. **Read the log file:** Process each line in the authentication log.
-3. **Search for failed logins:** Use a regular expression to identify matching authentication events.
-4. **Extract the source IP:** Retrieve the IP address from each relevant log entry.
-5. **Record timestamps:** Store the time of each failed login attempt.
-6. **Filter old attempts:** Remove attempts that fall outside the configured time window.
-7. **Check the threshold:** Determine whether the IP address has reached the alert threshold.
-8. **Generate an alert:** Print a warning when suspicious activity is detected.
-9. **Reset the counter:** Clear the recorded attempts for that IP address after triggering an alert.
+- `LOG_FILE`: the authentication log location
+- `THRESHOLD`: number of failed login attempts needed to trigger an alert
+- `TIME_WINDOW`: time range used to evaluate repeated activity
+- `FAIL_REGEX`: pattern used to detect failed login entries
 
-This sequence demonstrates the core mechanics of simple event-based intrusion detection and automated alerting.
+These values can be changed depending on the environment and testing scenario.
 
-## 9. Configuration Options
+## 11. Code Documentation and Standards
 
-The script uses several variables to control its behavior:
+The code is designed to be readable and maintainable. It follows these documentation practices:
 
-| Variable | Purpose | Default Value |
-| --- | --- | --- |
-| `LOG_FILE` | Specifies the authentication log filename | `Auth.Log` |
-| `FAIL_REGEX` | Matches failed password attempts and extracts username/IP data | Regular expression |
-| `THRESHOLD` | Number of failed attempts required to trigger an alert | `3` |
-| `TIME_WINDOW` | Time range used to evaluate repeated attempts, in seconds | `60` |
-| `FAILED_ATTEMPTS` | Stores timestamps for each source IP address | Empty dictionary |
+- Meaningful variable names
+- Clear function separation
+- Comments explaining the purpose of logic blocks
+- Consistent formatting and indentation
+- Simple structure that is easy to follow for educational use
 
-Changing the threshold or time window allows you to adjust how sensitive the IDS is to repeated login failures.
-
-## 10. Code Documentation and Standards
-
-The Python source code includes comments explaining key configuration settings and detection logic. The functions are organized to separate responsibilities such as reading the log file, checking log entries, and handling failed login detection.
-
-The project uses descriptive names for variables and functions to improve readability and maintainability. Consistent indentation and standard Python naming conventions help make the code easier to understand and modify.
-
-## 11. Security Automation
-
-This project demonstrates how security automation can reduce the manual effort involved in reviewing authentication logs. Instead of scanning logs by hand, the script can quickly identify repeated failed login attempts and highlight suspicious patterns.
-
-Automated log analysis can help security analysts identify possible attacks or misconfiguration issues faster. Although this project implements only basic detection, the same concepts can be extended to larger systems, centralized logging, and security event monitoring.
-
-Possible future enhancements include automatic log collection, event correlation, centralized logging, and integration with Security Information and Event Management (SIEM) systems.
+This project emphasizes clarity and readability so that students and developers can easily understand how the IDS works.
 
 ## 12. Limitations
 
-This project is a basic educational IDS and has several limitations:
+This project is intentionally simple and has several limitations:
 
-- It processes an existing log file rather than continuously monitoring new entries.
-- It depends on log format consistency and the configured regular expression.
-- It uses a simple threshold-based detection method.
-- It may generate false positives when legitimate users enter incorrect passwords repeatedly.
-- It does not verify whether a login attempt eventually succeeded.
-- It does not block IP addresses or automatically respond to suspicious activity.
-- It does not provide advanced analytics, centralized alert handling, or long-term logging.
+- It reads from a log file rather than continuously monitoring live traffic.
+- It depends on the log format matching the detection pattern.
+- It may generate false positives for legitimate users who mistype passwords.
+- It does not automatically block suspicious IP addresses.
+- It does not verify whether a login eventually succeeded.
+- It does not provide advanced analytics or centralized log correlation.
 
-An alert indicates potentially suspicious activity, not definitive proof of an attack.
+An alert indicates suspicious activity, not definitive proof of malicious behavior.
 
 ## 13. Future Improvements
 
-Possible improvements include:
+Potential improvements include:
 
-- Continuously monitoring newly added log entries.
-- Saving alerts to a separate security log.
-- Adding timestamps to alert messages for more detailed investigation.
-- Supporting multiple authentication log formats.
-- Detecting additional suspicious login patterns.
-- Generating summary reports.
-- Sending notifications by email or messaging platforms.
-- Integrating with SIEM platforms.
-- Adding command-line configuration options.
+- Real-time log monitoring
+- Saving alerts to a dedicated security log
+- Supporting multiple log formats
+- Logging timestamps in a more detailed format
+- Detecting more advanced attack patterns
+- Generating summary reports
+- Sending notifications through email or messaging platforms
+- Integrating with SIEM tools
+- Adding command-line options for configuration
 
 ## 14. Ethical and Legal Considerations
 
-This tool should only be used on systems and authentication logs that you own or have explicit permission to monitor.
+This project should only be used on systems and logs that you own or are explicitly authorized to monitor.
 
-Do not upload real authentication logs containing sensitive information to a public GitHub repository. Use fictional, sanitized, or clearly authorized test data for demonstrations and learning.
-
-Respect privacy laws, organizational policies, and applicable security regulations when working with logs or monitoring systems.
+Do not upload sensitive authentication logs to public repositories. Use fictional, sanitized, or authorized data for testing and educational purposes. Respect privacy, institutional policies, and applicable cybersecurity regulations when working with logs or monitoring systems.
 
 ## 15. Conclusion
 
-The Simple Python Intrusion Detection System demonstrates how Python can be used to analyze authentication logs, track failed login attempts, and generate automated security alerts.
+The Simple IDS CYB333 Project demonstrates how Python can be used to analyze authentication logs, identify repeated failed login attempts, and generate security alerts. It provides a foundational example of event-based detection, log analysis, and cybersecurity automation.
 
-The project provides practical experience with regular expressions, dictionaries, timestamps, file handling, and basic intrusion detection logic. It serves as an introductory example of how programming can support cybersecurity monitoring and alerting in a lightweight, approachable way.
+This project is a practical introduction to intrusion detection concepts and helps connect Python programming to real-world security monitoring tasks.
 
-## Author
+## 16. Author Information
 
-Nikolas Ordonez
+**Name:** Nikolas Ordonez  
+**GitHub:** ordonez3922  
+**Course:** CYB333  
+**Project:** Simple IDS CYB333 Project
 
-Educational cybersecurity and Python security automation project for CYB333.
+Educational cybersecurity project focused on Python-based intrusion detection and log analysis.
